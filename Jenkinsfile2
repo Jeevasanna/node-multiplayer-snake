@@ -6,20 +6,20 @@ node ('Ubuntu-app-agent'){
     }  
     
     stage('Build-and-Tag') {
-    //sh 'echo Build-andTag'
+    ///sh 'echo Build-andTag'
     /* This builds the actual image; synonymous to
          * docker build on the command line */
         app = docker.build("zmonsif/test")
     }
     stage('Post-to-dockerhub') {
-    //sh 'echo Post-to-dockerhub'
+    ///sh 'echo Post-to-dockerhub'
      docker.withRegistry('https://registry.hub.docker.com', 'training_creds_docker') {
             app.push("latest")
         			}
          }
     
     stage('Pull-image-server') {
-    //sh 'echo Pull-image-server'
+    ///sh 'echo Pull-image-server'
          sh "docker-compose down"
          sh "docker-compose up -d"	 
       }
